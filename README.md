@@ -28,11 +28,14 @@ npm run dev                  # http://localhost:3000
 
 The contact form writes leads to [Baserow](https://baserow.io).
 
+Put real values in **`.env.local`** (git-ignored). `.env.example` is committed,
+so it must never contain a live token.
+
 | Variable            | Required | Notes                                                      |
 | ------------------- | -------- | ---------------------------------------------------------- |
 | `BASEROW_TOKEN`     | yes      | Database token with **create** permission on the leads table |
 | `BASEROW_TABLE_ID`  | yes      | Numeric table id, visible in the table's URL                 |
-| `BASEROW_API_URL`   | no       | Only for a self-hosted instance (default `https://api.baserow.io`) |
+| `BASEROW_API_URL`   | yes      | Base URL of the instance, e.g. `https://data.example.com`     |
 
 The token is read exclusively in `lib/baserow.ts`, which is marked
 `server-only` — it never reaches the browser. Submissions go through
@@ -40,10 +43,23 @@ The token is read exclusively in `lib/baserow.ts`, which is marked
 
 ### Baserow table columns
 
-Create these columns, with exactly these names (the API is called with
-`user_field_names=true`):
+The API is called with `user_field_names=true`, so the column names must match
+exactly:
 
-`الاسم` · `الجوال` · `البريد` · `نوع النزاع` · `ملخص النزاع` · `المصدر`
+| Column | Type | Notes |
+| --- | --- | --- |
+| `name` | Single line text | primary |
+| `phone` | Single line text | |
+| `email` | Single line text | |
+| `details` | Long text | |
+| `caseType` | **Single select** | its 8 options must match `caseTypes` in `lib/content.ts` verbatim |
+
+`caseType` is a single select, so Baserow rejects `""`. When the visitor leaves
+the dropdown blank, `lib/baserow.ts` sends `null` instead — do not "simplify"
+that back to an empty string, or every lead without a dispute type will fail.
+
+If you add or rename a dispute type, change it in **both** places or the
+submission is rejected with `ERROR_REQUEST_BODY_VALIDATION`.
 
 Without the env vars set, the form still renders and validates; a submit fails
 gracefully and offers a WhatsApp fallback instead of dead-ending.

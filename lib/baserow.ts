@@ -15,30 +15,37 @@ export type Lead = {
 
 /** Field names must match the columns in the Baserow table. */
 type BaserowRow = {
-  الاسم: string;
-  الجوال: string;
-  البريد: string;
-  "نوع النزاع": string;
-  "ملخص النزاع": string;
-  المصدر: string;
+  name: string;
+  phone: string;
+  email: string;
+  /**
+   * A single-select field. Baserow rejects "" with
+   * ERROR_REQUEST_BODY_VALIDATION, so an unanswered dropdown must be sent as
+   * null. The allowed values are the 8 labels in `caseTypes` in lib/content.ts
+   * — they must stay identical to the select options on the table.
+   */
+  caseType: string | null;
+  details: string;
 };
 
 export async function createLead(lead: Lead): Promise<void> {
   const token = process.env.BASEROW_TOKEN;
   const tableId = process.env.BASEROW_TABLE_ID;
-  const host = process.env.BASEROW_API_URL ?? "https://api.baserow.io";
+  // Self-hosted Baserow, so the host is required rather than defaulted.
+  const host = process.env.BASEROW_API_URL;
 
-  if (!token || !tableId) {
-    throw new Error("BASEROW_TOKEN / BASEROW_TABLE_ID are not configured.");
+  if (!token || !tableId || !host) {
+    throw new Error(
+      "BASEROW_TOKEN / BASEROW_TABLE_ID / BASEROW_API_URL are not configured.",
+    );
   }
 
   const row: BaserowRow = {
-    الاسم: lead.name,
-    الجوال: lead.phone,
-    البريد: lead.email ?? "",
-    "نوع النزاع": lead.caseType ?? "",
-    "ملخص النزاع": lead.details,
-    المصدر: "صفحة التحكيم الهندسي",
+    name: lead.name,
+    phone: lead.phone,
+    email: lead.email ?? "",
+    caseType: lead.caseType?.trim() ? lead.caseType : null,
+    details: lead.details,
   };
 
   const res = await fetch(
