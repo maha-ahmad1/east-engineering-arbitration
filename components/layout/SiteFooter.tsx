@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { footer } from "@/lib/content";
 import { site } from "@/lib/site";
@@ -10,19 +11,17 @@ export function SiteFooter() {
       <div className="container-x py-14">
         <div className="grid gap-10 md:grid-cols-[1.6fr_1fr_1.2fr]">
           <div>
-            <div className="flex items-center gap-2.5">
-              <span className="grid h-9 w-9 place-items-center rounded-[10px] bg-gold font-bold text-ink">
-                ش
-              </span>
-              <span className="flex flex-col leading-tight">
-                <span className="text-[0.95rem] font-bold text-ink">
-                  {site.firm}
-                </span>
-                <span className="text-[0.7rem] text-muted">
-                  {site.tagline}
-                </span>
-              </span>
-            </div>
+            {/* Full lockup — the footer has the vertical room for it. */}
+            <Image
+              src="/logo-full.png"
+              alt={`${site.firm} — ${site.tagline}`}
+              width={846}
+              height={696}
+              sizes="200px"
+              className="h-auto w-[172px]"
+            />
+
+            <p className="mt-4 text-[0.8rem] text-muted">{site.tagline}</p>
 
             <p className="mt-5 max-w-[46ch] text-[0.925rem] leading-[1.9] text-muted">
               {footer.about}

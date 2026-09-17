@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { Menu, Phone, X } from "lucide-react";
 import { site } from "@/lib/site";
 import { hero } from "@/lib/content";
@@ -33,11 +34,21 @@ export function SiteHeader() {
       }`}
     >
       <div className="container-x flex h-[72px] items-center justify-between gap-4">
-        {/* Wordmark */}
-        <a href="#hero" className="flex items-center gap-2.5 shrink-0">
-          <span className="grid h-9 w-9 place-items-center rounded-[10px] bg-gold text-ink font-bold">
-            ش
-          </span>
+        {/* Logo lockup — the brand mark plus the service line. */}
+        <a
+          href="#hero"
+          className="flex items-center gap-3 shrink-0"
+          aria-label={`${site.firm} — ${site.shortName}`}
+        >
+          <Image
+            src="/logo-mark.png"
+            alt=""
+            aria-hidden
+            width={131}
+            height={160}
+            priority
+            className="h-9 w-auto"
+          />
           <span className="flex flex-col leading-tight">
             <span className="text-[0.95rem] font-bold text-ink">
               {site.firm}
@@ -90,8 +101,18 @@ export function SiteHeader() {
       {open && (
         <div className="fixed inset-0 z-50 bg-white lg:hidden">
           <div className="container-x flex h-[72px] items-center justify-between">
-            <span className="text-[0.95rem] font-bold text-ink">
-              {site.firm}
+            <span className="flex items-center gap-3">
+              <Image
+                src="/logo-mark.png"
+                alt=""
+                aria-hidden
+                width={131}
+                height={160}
+                className="h-9 w-auto"
+              />
+              <span className="text-[0.95rem] font-bold text-ink">
+                {site.firm}
+              </span>
             </span>
             <button
               type="button"

@@ -57,6 +57,27 @@ Contact details live in `lib/site.ts`.
 > `⚠ DRAFT — awaiting client review`. Everything else is client-supplied text
 > used verbatim and should not be reworded.
 
+## Brand assets
+
+All derived from the official Eastern Consultants logo files.
+
+| File | Use |
+| --- | --- |
+| `public/logo-mark.png` | The mark alone — header lockup |
+| `public/logo-full.png` | Full lockup (mark + Arabic/English wordmark) — footer |
+| `app/icon.png` | 512×512 site icon |
+| `app/favicon.ico` | Classic favicon, 16/32/48/256 |
+| `app/apple-icon.png` | 180×180 Apple touch icon |
+| `app/opengraph-image.png` | 1200×630 social share card |
+
+The files under `app/` use Next's metadata-file convention, so the `<link>`
+and `og:image` tags are generated automatically — do not add them by hand.
+The `TM` glyph was cropped out of the mark for the icons so it stays centred
+at small sizes; the footer lockup keeps it.
+
+To regenerate after a logo update, replace `logo-full.png` / `logo-mark.png`
+and re-export the icons at the sizes in the table above.
+
 ## Project layout
 
 ```
