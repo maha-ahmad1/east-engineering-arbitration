@@ -26,7 +26,7 @@ export function Services() {
           <Reveal className="lg:col-span-2">
             <article className="relative h-full overflow-hidden rounded-[var(--radius-card)] bg-ink p-7 md:p-9">
               <Image
-                src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1400&q=85"
+                src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1400&q=85"
                 alt=""
                 aria-hidden
                 fill

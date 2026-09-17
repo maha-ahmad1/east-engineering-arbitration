@@ -1,5 +1,9 @@
 import Image from "next/image";
 import { FileCheck2, Phone } from "lucide-react";
+// Statically imported so Next can generate the blur placeholder and inline
+// the intrinsic size — this is the LCP image, so it is served from our own
+// origin rather than fetched from a third party.
+import heroImage from "@/public/hero-drawings.jpg";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { hero } from "@/lib/content";
@@ -69,11 +73,12 @@ export function Hero() {
         <Reveal index={2} className="relative">
           <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[var(--radius-card)] bg-sand">
             <Image
-              src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=1200&q=90"
-              alt="مراجعة مخططات ومستندات هندسية على مكتب العمل"
+              src={heroImage}
+              alt="مهندس يراجع المخططات والرسومات الهندسية بمسطرة القياس على طاولة العمل"
               fill
               priority
-              quality={90}
+              quality={85}
+              placeholder="blur"
               sizes="(max-width: 1024px) 100vw, 45vw"
               className="photo-grade object-cover"
             />
