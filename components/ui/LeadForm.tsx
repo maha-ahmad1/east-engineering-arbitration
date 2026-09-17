@@ -98,8 +98,11 @@ export function LeadForm() {
     );
   }
 
-  const field =
-    "mt-1.5 w-full rounded-[12px] border border-line bg-white px-4 py-3 text-[0.95rem] text-ink outline-none transition-colors placeholder:text-muted/60 focus:border-gold";
+  // Text colour is kept separate so the select can render its placeholder in
+  // the muted tone the text inputs use for theirs.
+  const fieldBase =
+    "mt-1.5 w-full rounded-[12px] border border-line bg-white px-4 py-3 text-[0.95rem] outline-none transition-colors placeholder:text-muted/60 focus:border-gold";
+  const field = `${fieldBase} text-ink`;
   const label = "text-[0.875rem] font-semibold text-ink";
 
   return (
@@ -167,9 +170,13 @@ export function LeadForm() {
             id="lead-type"
             value={caseType}
             onChange={(e) => setCaseType(e.target.value)}
-            className={field}
+            className={`${fieldBase} ${caseType ? "text-ink" : "text-muted/60"}`}
           >
-            <option value="">{f.caseTypePlaceholder}</option>
+            {/* Placeholder only. `hidden` keeps it out of the open list while
+                it still labels the field until a type is picked. */}
+            <option value="" disabled hidden>
+              {f.caseTypePlaceholder}
+            </option>
             {caseTypes.items.map((item) => (
               <option key={item.id} value={item.label}>
                 {item.label}
