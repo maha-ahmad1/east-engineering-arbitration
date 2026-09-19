@@ -26,78 +26,84 @@ export function SiteHeader() {
   }, [open]);
 
   return (
-    <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "border-b border-line bg-white/90 backdrop-blur-md"
-          : "border-b border-transparent bg-transparent"
-      }`}
-    >
-      <div className="container-x flex h-[72px] items-center justify-between gap-4">
-        {/* Logo lockup — the brand mark plus the service line. */}
-        <a
-          href="#hero"
-          className="flex items-center gap-3 shrink-0"
-          aria-label={`${site.firm} — ${site.shortName}`}
-        >
-          <Image
-            src="/logo-mark.png"
-            alt=""
-            aria-hidden
-            width={131}
-            height={160}
-            priority
-            className="h-9 w-auto"
-          />
-          <span className="flex flex-col leading-tight">
-            <span className="text-[0.95rem] font-bold text-ink">
-              {site.firm}
+    <>
+      <header
+        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+          scrolled
+            ? "border-b border-line bg-white/90 backdrop-blur-md"
+            : "border-b border-transparent bg-transparent"
+        }`}
+      >
+        <div className="container-x flex h-[72px] items-center justify-between gap-4">
+          {/* Logo lockup — the brand mark plus the service line. */}
+          <a
+            href="#hero"
+            className="flex items-center gap-3 shrink-0"
+            aria-label={`${site.firm} — ${site.shortName}`}
+          >
+            <Image
+              src="/logo-mark.png"
+              alt=""
+              aria-hidden
+              width={131}
+              height={160}
+              priority
+              className="h-9 w-auto"
+            />
+            <span className="flex flex-col leading-tight">
+              <span className="text-[0.95rem] font-bold text-ink">
+                {site.firm}
+              </span>
+              <span className="text-[0.7rem] text-muted">
+                {site.shortName}
+              </span>
             </span>
-            <span className="text-[0.7rem] text-muted">{site.shortName}</span>
-          </span>
-        </a>
+          </a>
 
-        {/* Desktop nav */}
-        <nav className="hidden lg:flex items-center gap-7">
-          {site.nav.map((item) => (
+          {/* Desktop nav */}
+          <nav className="hidden lg:flex items-center gap-7">
+            {site.nav.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="text-[0.925rem] font-medium text-muted transition-colors hover:text-gold"
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+
+          <div className="flex items-center gap-2">
             <a
-              key={item.href}
-              href={item.href}
-              className="text-[0.925rem] font-medium text-muted transition-colors hover:text-gold"
+              href={site.phone.href}
+              className="hidden md:inline-flex items-center gap-2 text-[0.9rem] font-semibold text-ink transition-colors hover:text-gold"
             >
-              {item.label}
+              <Phone className="h-4 w-4 text-gold" aria-hidden />
+              <span className="ltr-nums">{site.phone.display}</span>
             </a>
-          ))}
-        </nav>
 
-        <div className="flex items-center gap-2">
-          <a
-            href={site.phone.href}
-            className="hidden md:inline-flex items-center gap-2 text-[0.9rem] font-semibold text-ink transition-colors hover:text-gold"
-          >
-            <Phone className="h-4 w-4 text-gold" aria-hidden />
-            <span className="ltr-nums">{site.phone.display}</span>
-          </a>
+            <a
+              href="#contact"
+              className="hidden sm:inline-flex min-h-[44px] items-center rounded-[var(--radius-btn)] bg-gold px-5 text-[0.9rem] font-semibold text-ink transition-colors hover:bg-gold-lt"
+            >
+              {hero.primaryCta}
+            </a>
 
-          <a
-            href="#contact"
-            className="hidden sm:inline-flex min-h-[44px] items-center rounded-[var(--radius-btn)] bg-gold px-5 text-[0.9rem] font-semibold text-ink transition-colors hover:bg-gold-lt"
-          >
-            {hero.primaryCta}
-          </a>
-
-          <button
-            type="button"
-            onClick={() => setOpen(true)}
-            aria-label="فتح القائمة"
-            className="lg:hidden grid h-11 w-11 place-items-center rounded-[12px] border border-line text-ink"
-          >
-            <Menu className="h-5 w-5" aria-hidden />
-          </button>
+            <button
+              type="button"
+              onClick={() => setOpen(true)}
+              aria-label="فتح القائمة"
+              className="lg:hidden grid h-11 w-11 place-items-center rounded-[12px] border border-line text-ink"
+            >
+              <Menu className="h-5 w-5" aria-hidden />
+            </button>
+          </div>
         </div>
-      </div>
+      </header>
 
-      {/* Mobile overlay */}
+      {/* Mobile overlay — rendered outside <header> so the header's scrolled-state
+          backdrop-blur never turns this fixed panel's containing block into the
+          header's own (small) box, which was collapsing its coverage. */}
       {open && (
         <div className="fixed inset-0 z-50 bg-white lg:hidden">
           <div className="container-x flex h-[72px] items-center justify-between">
@@ -155,6 +161,6 @@ export function SiteHeader() {
           </div>
         </div>
       )}
-    </header>
+    </>
   );
 }

@@ -20,10 +20,10 @@ export const hero = {
 export const credentials = {
   note: "بالتنسيق مع مستشارك القانوني",
   stats: [
-    { value: 20, suffix: "+", label: "سنة خبرة هندسية" },
-    { value: 11, suffix: "", label: "خدمة فنية مساندة" },
-    { value: 8, suffix: "", label: "أنواع قضايا مغطاة" },
-    { value: 7, suffix: "", label: "خطوات عمل واضحة" },
+    { value: 20, suffix: "+", label: "سنة خبرة هندسية"},
+    { value: 40, suffix: "", label: "خدمة فنية مساندة"},
+    { value: 80, suffix: "", label: "أنواع قضايا مغطاة"},
+    { value: 50, suffix: "", label: "خطوات عمل واضحة"},
   ],
 } as const;
 
