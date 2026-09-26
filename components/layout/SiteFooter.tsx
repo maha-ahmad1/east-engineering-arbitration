@@ -53,8 +53,9 @@ export function SiteFooter() {
             <ul className="mt-4 flex flex-col gap-3">
               <li>
                 <a
+                  id="cta-phone-footer"
                   href={site.phone.href}
-                  className="flex items-center gap-2.5 text-[0.9rem] text-muted transition-colors hover:text-gold"
+                  className="phone-link flex items-center gap-2.5 text-[0.9rem] text-muted transition-colors hover:text-gold"
                 >
                   <Phone className="h-4 w-4 shrink-0 text-gold" aria-hidden />
                   <span className="ltr-nums">{site.phone.display}</span>

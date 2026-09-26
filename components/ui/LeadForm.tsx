@@ -84,7 +84,7 @@ export function LeadForm() {
 
   if (status === "success") {
     return (
-      <div className="rounded-[var(--radius-card)] border border-gold/40 bg-white p-8 text-center">
+      <div className="form-success-message rounded-[var(--radius-card)] border border-gold/40 bg-white p-8 text-center">
         <span className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-gold text-ink">
           <CheckCircle2 className="h-7 w-7" aria-hidden />
         </span>
@@ -206,6 +206,7 @@ export function LeadForm() {
       </div>
 
       <button
+        id="cta-form-submit"
         type="submit"
         disabled={status === "submitting"}
         className="mt-6 inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-[var(--radius-btn)] bg-gold font-semibold text-ink transition-colors hover:bg-gold-lt disabled:cursor-not-allowed disabled:opacity-70"
@@ -231,10 +232,11 @@ export function LeadForm() {
           </p>
           <p className="mt-1 text-[0.85rem] text-red-700/80">{f.errorBody}</p>
           <a
+            id="cta-whatsapp-error"
             href={site.whatsapp.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-3 inline-flex items-center gap-2 rounded-[10px] bg-wa px-4 py-2 text-[0.85rem] font-semibold text-white"
+            className="whatsapp-link mt-3 inline-flex items-center gap-2 rounded-[10px] bg-wa px-4 py-2 text-[0.85rem] font-semibold text-white"
           >
             <MessageCircle className="h-4 w-4" aria-hidden />
             {f.errorCta}

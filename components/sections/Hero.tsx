@@ -48,7 +48,12 @@ export function Hero() {
           <Reveal index={4}>
             <div className="mt-9 flex flex-col gap-3 sm:flex-row">
               <Button href="#contact">{hero.primaryCta}</Button>
-              <Button href={site.phone.href} variant="ghost">
+              <Button
+                id="cta-phone-hero"
+                href={site.phone.href}
+                variant="ghost"
+                className="phone-link"
+              >
                 <Phone className="h-4 w-4 text-gold" aria-hidden />
                 <span className="ltr-nums">{site.phone.display}</span>
               </Button>

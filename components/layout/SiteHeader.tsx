@@ -75,8 +75,9 @@ export function SiteHeader() {
 
           <div className="flex items-center gap-2">
             <a
+              id="cta-phone-header"
               href={site.phone.href}
-              className="hidden md:inline-flex items-center gap-2 text-[0.9rem] font-semibold text-ink transition-colors hover:text-gold"
+              className="phone-link hidden md:inline-flex items-center gap-2 text-[0.9rem] font-semibold text-ink transition-colors hover:text-gold"
             >
               <Phone className="h-4 w-4 text-gold" aria-hidden />
               <span className="ltr-nums">{site.phone.display}</span>
@@ -152,8 +153,9 @@ export function SiteHeader() {
               {hero.primaryCta}
             </a>
             <a
+              id="cta-phone-mobile"
               href={site.phone.href}
-              className="inline-flex min-h-[52px] items-center justify-center gap-2 rounded-[var(--radius-btn)] border border-line font-semibold text-ink"
+              className="phone-link inline-flex min-h-[52px] items-center justify-center gap-2 rounded-[var(--radius-btn)] border border-line font-semibold text-ink"
             >
               <Phone className="h-4 w-4 text-gold" aria-hidden />
               <span className="ltr-nums">{site.phone.display}</span>

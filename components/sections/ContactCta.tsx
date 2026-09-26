@@ -7,6 +7,8 @@ import { site } from "@/lib/site";
 export function ContactCta() {
   const channels = [
     {
+      id: "cta-phone-contact",
+      trackClass: "phone-link",
       icon: Phone,
       label: contact.channels.call,
       value: site.phone.display,
@@ -15,6 +17,8 @@ export function ContactCta() {
       external: false,
     },
     {
+      id: "cta-whatsapp-contact",
+      trackClass: "whatsapp-link",
       icon: MessageCircle,
       label: contact.channels.whatsapp,
       value: site.phone.display,
@@ -23,6 +27,8 @@ export function ContactCta() {
       external: true,
     },
     {
+      id: "cta-email-contact",
+      trackClass: "",
       icon: Mail,
       label: contact.channels.email,
       value: site.email.display,
@@ -59,11 +65,12 @@ export function ContactCta() {
             {channels.map((channel, i) => (
               <Reveal key={channel.label} index={i}>
                 <a
+                  id={channel.id}
                   href={channel.href}
                   {...(channel.external
                     ? { target: "_blank", rel: "noopener noreferrer" }
                     : {})}
-                  className="flex h-full flex-col gap-2 rounded-[var(--radius-card)] border border-white/10 bg-white/[0.04] p-4 transition-colors hover:border-gold/50 hover:bg-white/[0.08]"
+                  className={`${channel.trackClass} flex h-full flex-col gap-2 rounded-[var(--radius-card)] border border-white/10 bg-white/[0.04] p-4 transition-colors hover:border-gold/50 hover:bg-white/[0.08]`}
                 >
                   <span className="grid h-10 w-10 place-items-center rounded-[10px] bg-gold/15 text-gold">
                     <channel.icon className="h-5 w-5" aria-hidden />
